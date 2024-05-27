@@ -376,13 +376,15 @@ const BubbleHeatmap = ({ state, hoveredGene, setHoveredGeneColor, setHoveredGene
             }}
           />
         </div>
-        <div>
-          <Tooltip placement="rightTop" color="#108ee9" title={dataSource} overlayStyle={{ maxWidth: '600px', overflowX: 'auto' }}>
-            <Button href={paperHyperlink} target="_blank">Data source</Button>
-          </Tooltip>
-        </div>
+        {!queriedGenes &&
+          <div>
+            <Tooltip placement="rightTop" color="#108ee9" title={dataSource} overlayStyle={{ maxWidth: '600px', overflowX: 'auto' }}>
+              <Button href={paperHyperlink} target="_blank">Data source</Button>
+            </Tooltip>
+          </div>
+        }
         { queriedGenes &&
-          <div style={{ display: 'flex', margin: '0 3vw' }}>
+          <div style={{ display: 'flex', margin: '0 3vw'}}>
             <InfoCircleOutlined style={{ fontSize: '18px', color: '#1890ff', marginRight: '15px' }} />
             <Paragraph style={{ margin: 0, fontSize: '15px'}}>
               The gene interaction pairs are identified using data from <Link href="https://omnipathdb.org/" target="_blank">OmniPath</Link>, a comprehensive molecular biology database that combines information from over 100 resources.

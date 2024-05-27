@@ -2,13 +2,15 @@ import React from 'react';
 import { useChat } from '../ChatContext'; 
 import Plot from 'react-plotly.js';
 import {selectAll} from "d3";
-
-
+import { Button, Tooltip } from 'antd';
+import orgMeta from '../../utils/organismMetadata.js';
 
 const OrganCellChart = ({ state }) => {
   const { setLocalMessage } = useChat();
-  const { plotLocation, apiCellOrgan, organName, measurementType } =  state;
-  const scaleFactor = plotLocation === 'celltypes' ? 1.3 : 1; // Scale factor for size adjustment
+  const { plotLocation, organism, apiCellOrgan, organName, measurementType } =  state;
+  let dataSource = orgMeta[organism]?.dataSource || "Data source not available";
+  let paperHyperlink = orgMeta[organism]?.paperHyperlink || "Hyperlink unavailable";
+  const scaleFactor = plotLocation === 'celltypes' ? 1.2 : 1; // Scale factor for size adjustment
   // Find the index of the organ, organ cases are different in species
   const organIndex = apiCellOrgan.organs.findIndex(organ => organ.toLowerCase() === organName.toLowerCase());
 
@@ -57,9 +59,9 @@ const OrganCellChart = ({ state }) => {
         range: [-0.2, 4],
       },
       title: {
-        text: `<b>Cell type abundance in <span style='color:#0958d9;'>${organName}</span></b>`,
+        text: `<b>Cell type abundance in ${organism} ${organName}</span></b>`,
         font: {
-          size: 14 * scaleFactor
+          size: 13 * scaleFactor
         },
       },
       yaxis: {
@@ -86,6 +88,8 @@ const OrganCellChart = ({ state }) => {
 
   
   return (
+  <div>
+    <div>
       <Plot 
           data={data}
           layout={layout}
@@ -107,6 +111,13 @@ const OrganCellChart = ({ state }) => {
               .on("click", (event) => yAxisLabelClick(event));
           }}
       />
+    </div>
+    <div>
+      <Tooltip placement="rightTop" color="#108ee9" title={dataSource} overlayStyle={{ maxWidth: '600px', overflowX: 'auto' }}>
+          <Button href={paperHyperlink} target="_blank">Data source</Button>
+        </Tooltip>
+    </div>
+  </div>
   );
 };
 

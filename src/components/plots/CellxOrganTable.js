@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'antd';
 import { StopTwoTone } from '@ant-design/icons';
 import orgMeta from '../../utils/organismMetadata.js';
-import { Popover, Button } from 'antd';
+import { Button, Tooltip } from 'antd';
 
 // FIXME: why is this function the only one that takes the entire state in like this??
 const CellxOrganTable = ({ state }) => {
@@ -82,9 +82,9 @@ const CellxOrganTable = ({ state }) => {
     return (
       <div style={{ display: "flex", flexDirection: "column", margin: "1vh" }}>
         <div>
-          <Popover content={dataSource} placement='right'>
+          <Tooltip placement="rightTop" color="#108ee9" title={dataSource} overlayStyle={{ maxWidth: '600px', overflowX: 'auto' }}>
             <Button href={paperHyperlink} target="_blank">Data source</Button>
-          </Popover>
+          </Tooltip>
         </div>
         <br></br>
         <div>

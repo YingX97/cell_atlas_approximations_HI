@@ -1,6 +1,6 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
-import { Popover, Button } from 'antd';
+import { Button, Tooltip } from 'antd';
 import chroma from 'chroma-js';
 import orgMeta from '../../utils/organismMetadata.js';
 
@@ -70,9 +70,9 @@ const CoexpressScatter = ({ state }) => {
             />
         </div>
         <div>
-          <Popover content={dataSource} placement='right'>
+            <Tooltip placement="rightTop" color="#108ee9" title={dataSource} overlayStyle={{ maxWidth: '600px', overflowX: 'auto' }}>
             <Button href={paperHyperlink} target="_blank">Data source</Button>
-          </Popover>
+            </Tooltip>
         </div>
     </div>
   );

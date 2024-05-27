@@ -1,7 +1,7 @@
 import React from 'react';
 import { downloadSVG } from '../../utils/downloadHelpers/downLoadSvg';
 import Plot from 'react-plotly.js';
-import { Popover, Button } from 'antd';
+import {  Button, Tooltip } from 'antd';
 import orgMeta from '../../utils/organismMetadata.js';
 
 const BarChart = ({ state }) => {
@@ -138,9 +138,9 @@ const BarChart = ({ state }) => {
         />
       </div>
       <div>
-        <Popover content={dataSource} placement='right'>
+        <Tooltip placement="rightTop" color="#108ee9" title={dataSource} overlayStyle={{ maxWidth: '600px', overflowX: 'auto' }}>
           <Button href={paperHyperlink} target="_blank">Data source</Button>
-        </Popover>
+        </Tooltip>
       </div>
     </div>
   );
